@@ -4,10 +4,19 @@ metadata:
   name: rhiannonlau-frontend-deploy
 spec:
   replicas: 3
-  - name: rhiannonlau-frontend-image
-    iamge: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image
-    ports:
-    - containerPort: 80
+  selector:
+    matchLabels:
+      app: rhiannonlau-frontend-image
+  template:
+    metadata:
+      labels:
+        app: rhiannonlau-frontend-image
+    spec:
+      containers:
+      - name: rhiannonlau-frontend-image
+        image: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image
+        ports:
+        - containerPort: 80
 
 ---
 apiVersion: v1

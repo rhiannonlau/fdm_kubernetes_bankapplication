@@ -4,10 +4,19 @@ metadata:
   name: rhiannonlau-backend-deploy
 spec:
   replicas: 1
-  - name: rhiannonlau-backend-image
-    iamge: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-backend-image
-    ports:
-    - containerPort: 8080
+  selector:
+    matchLabels:
+      app: rhiannonlau-backend-image
+  template:
+    metadata:
+      labels:
+        app: rhiannonlau-backend-image
+    spec:
+      containers:
+      - name: rhiannonlau-backend-image
+        image: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-backend-image
+        ports:
+        - containerPort: 8080
 
 ---
 apiVersion: v1
