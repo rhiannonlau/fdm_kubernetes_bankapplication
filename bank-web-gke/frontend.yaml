@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhiannonlau-frontend-deploy
+spec:
+  replicas: 3
+  - name: rhiannonlau-frontend-image
+    iamge: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image
+    ports:
+    - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rhiannonlau-frontend-svc
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer

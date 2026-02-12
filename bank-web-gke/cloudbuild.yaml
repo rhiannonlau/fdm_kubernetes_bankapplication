@@ -1,0 +1,21 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '--build-arg', 'REACT_APP_API_URL=https://rhiannonlau-backend-524103119199.us-central1.run.app/api/v1', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '-f./Dockerfile-before-https-first' ]
+  dir: 'frontend'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA' ]
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: [ 'run', 'deploy', 'rhiannonlau-frontend', '--image', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '--region', 'us-central1', '--port', '80', '--allow-unauthenticated' ]
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'frontend.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=monitoring-cluster'
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+  - 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA'
