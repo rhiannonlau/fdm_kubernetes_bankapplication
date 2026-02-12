@@ -6,7 +6,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 # Add backend URL as build-time environment variable
-ARG REACT_APP_API_URL=http://bank-api-service:80
+ARG REACT_APP_API_URL=http://bank-api-service:80/api/v1
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 COPY package*.json ./
