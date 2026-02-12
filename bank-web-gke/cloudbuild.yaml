@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '--build-arg', 'REACT_APP_API_URL=https://rhiannonlau-bank-backend-524103119199.us-central1.run.app/api/v1', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '-f', './Dockerfile-before-https-first', '.' ]
+  args: [ 'build', '--build-arg', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '-f', './Dockerfile-before-https-first', '.' ]
   dir: 'bank-web-gke'
 
 - name: 'gcr.io/cloud-builders/docker'
