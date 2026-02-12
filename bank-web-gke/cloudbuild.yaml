@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '--build-arg', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '-f', 'Dockerfile-before-https-first', '.' ]
+  args: [ 'build', '-f', 'Dockerfile-before-https-first', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '.' ]
   dir: 'bank-web-gke'
 
 - name: 'gcr.io/cloud-builders/docker'
