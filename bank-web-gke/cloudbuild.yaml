@@ -6,10 +6,6 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA' ]
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: [ 'run', 'deploy', 'rhiannonlau-frontend', '--image', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '--region', 'us-central1', '--port', '80', '--allow-unauthenticated' ]
-
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'frontend.yaml']
   dir: 'bank-web-gke'
