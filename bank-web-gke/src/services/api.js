@@ -182,7 +182,7 @@
 import axios from 'axios';
 import * as debug from './apiDebug';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = process.env.REACT_APP_API_URL + '/api/v1';
 const DEBUG = false;
 
 const instance = axios.create({
