@@ -6,11 +6,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: rhiannonlau-frontend-image
+      app: rhiannonlau-frontend
   template:
     metadata:
       labels:
-        app: rhiannonlau-frontend-image
+        app: rhiannonlau-frontend
     spec:
       containers:
       - name: rhiannonlau-frontend-image
@@ -25,7 +25,7 @@ metadata:
   name: rhiannonlau-frontend-svc
 spec:
   selector:
-    app: frontend
+    app: rhiannonlau-frontend
   ports:
     - port: 80
       targetPort: 80

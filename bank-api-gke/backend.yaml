@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rhiannonlau-backend-image
+      app: rhiannonlau-backend
   template:
     metadata:
       labels:
-        app: rhiannonlau-backend-image
+        app: rhiannonlau-backend
     spec:
       containers:
       - name: rhiannonlau-backend-image
@@ -25,7 +25,7 @@ metadata:
   name: rhiannonlau-backend-svc
 spec:
   selector:
-    app: backend
+    app: rhiannonlau-backend
   ports:
     - port: 8080
       targetPort: 8080
