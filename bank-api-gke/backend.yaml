@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rhiannonlau-backend-image
-        image: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-backend-image
+        image: us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-backend-image
         ports:
         - containerPort: 8080
 

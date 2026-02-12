@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rhiannonlau-frontend-image
-        image: northamerica-northeast2-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image
+        image: us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image
         ports:
         - containerPort: 80
 
