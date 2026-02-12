@@ -1,10 +1,10 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-f', 'Dockerfile-before-https-first', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '.' ]
+  args: [ 'build', '-f', 'Dockerfile-before-https-first', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image', '.' ]
   dir: 'bank-web-gke'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA' ]
+  args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image' ]
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'frontend.yaml']
@@ -15,4 +15,4 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 images:
-  - 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image'
