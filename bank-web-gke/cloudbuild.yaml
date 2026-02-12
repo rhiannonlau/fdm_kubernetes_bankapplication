@@ -1,18 +1,18 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '--build-arg', 'REACT_APP_API_URL=http://136.115.16.208/api/v1', '-f', 'Dockerfile-before-https-first', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image', '.' ]
+  args: [ 'build', '--build-arg', 'REACT_APP_API_URL=http://136.115.16.208/api/v1', '-f', 'Dockerfile-before-https-first', '-t', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA', '.' ]
   dir: 'bank-web-gke'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image' ]
+  args: [ 'push', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA' ]
 
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'frontend.yaml']
-  dir: 'bank-web-gke'
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=monitoring-cluster'
+- name: 'gcr.io/cloud-builders/gke-deploy'
+  args: ['run',
+    '--image', 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA',
+    '--filename', 'bank-web-gke/frontend.yaml',
+    '--location', 'us-central1-a',
+    '--cluster', 'monitoring-cluster']
 options:
   logging: CLOUD_LOGGING_ONLY
 images:
-  - 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image'
+  - 'us-central1-docker.pkg.dev/gcp-class-14/rhiannonlau-repo/rhiannonlau-frontend-image:$COMMIT_SHA'
